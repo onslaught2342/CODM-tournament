@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CODM Celebration</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@300;400;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="assests/static/styles.css" />
+	</head>
+	<body>
+		<h1>CODM</h1>
+		<div class="iframe-container">
+			<iframe
+				src="https://challonge.com/codm_school/module"
+				width="100%"
+				height="100%"
+				frameborder="0"
+				scrolling="auto"
+				allowtransparency="true"
+			></iframe>
+		</div>
+
+		<!-- Include CanvasConfetti library -->
+		<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+		<script>
+			// Function to trigger confetti from all sides
+			function triggerConfetti() {
+				const duration = 5000; // 5 seconds
+				const animationEnd = Date.now() + duration;
+
+				(function frame() {
+					confetti({
+						particleCount: 10,
+						angle: Math.random() * 360,
+						spread: 100,
+						origin: { x: Math.random(), y: Math.random() },
+						colors: ["#ffcc00", "#ff5733", "#ff6347", "#00e5ff", "#00ff00"],
+						startVelocity: 30,
+						ticks: 100,
+						gravity: 0.6,
+					});
+					if (Date.now() < animationEnd) {
+						requestAnimationFrame(frame);
+					}
+				})();
+			}
+
+			// Function to play a celebration sound effect
+			function playFireworksSound() {
+				const audio = new Audio(
+					"assests/media/132273__sl130594__fireworks.mp3"
+				);
+				audio.play();
+			}
+
+			// Function to play a gunshot sound effect
+			function playGunshotSound() {
+				const audio = new Audio(
+					"assests/media/shooting-the-crap-out-of-somone.mp3"
+				);
+				audio.play();
+			}
+
+			// Trigger confetti and sound effects on page load
+			window.onload = function () {
+				triggerConfetti();
+				setTimeout(playFireworksSound, 1); // Delay to sync with confetti
+				setTimeout(playGunshotSound, 1000); // Slightly delayed gunshot effect
+			};
+		</script>
+	</body>
+</html>
